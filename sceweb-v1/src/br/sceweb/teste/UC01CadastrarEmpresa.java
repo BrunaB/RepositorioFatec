@@ -40,7 +40,7 @@ public class UC01CadastrarEmpresa {
 	@Test
 	public void CT01UC01FBCadastra_empresa_com_sucesso() throws SQLException {
 		empresaDAO.exclui("89424232000180");
-		assertEquals("cadastro realizado com sucesso", empresaDAO.adiciona(empresa));
+		assertEquals(1, empresaDAO.adiciona(empresa));
 		empresaDAO.exclui("89424232000180");
 		
 	}
@@ -52,7 +52,7 @@ public class UC01CadastrarEmpresa {
 	@Test (expected = RuntimeException.class)
 	public void CT02UC01A2Cadastra_empresa_cnpj_ja_cadastrado() throws SQLException{
 		empresaDAO.adiciona(empresa);
-		assertEquals("cadastro com cnpj ja cadastrado", empresaDAO.adiciona(empresa));
+		assertEquals(1, empresaDAO.adiciona(empresa));
 		
 	}
 	
@@ -65,7 +65,6 @@ public class UC01CadastrarEmpresa {
 		
 		try{
 			empresa2.setCnpj("8942423200018");
-			fail ("deveria disparar uma exception");
 		}catch (Exception e){
 			assertEquals("CNPJ inválido!", e.getMessage());
 		}
@@ -81,7 +80,6 @@ public class UC01CadastrarEmpresa {
 		
 		try{
 			empresa2.setNomeDaEmpresa("");
-			fail("deveria disparar uma exception");
 		}catch (Exception e){
 			assertEquals("nome da empresa inválido!", e.getMessage());
 		}
