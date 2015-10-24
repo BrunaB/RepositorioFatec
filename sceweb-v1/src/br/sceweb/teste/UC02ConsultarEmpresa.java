@@ -49,6 +49,16 @@ public class UC02ConsultarEmpresa {
 		empresaDAO.exclui("89424232000180");
 		empresaDAO.exclui("76866310000155");
 	}
+	
+	/**
+	 * obj - verificar o comportamento do sistema na consulta de empresa com sucesso pelo controle 
+	 */
+	@Test
+	public void CT03UC02FBConsultarEmpresa_com_sucesso() {
+		empresaDAO.adiciona(empresa);
+		assertTrue(empresa.equals(empresaDAO.consultaEmpresas("89424232000180")));
+		empresaDAO.exclui("89424232000180");
+	}
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		empresaDAO.exclui("89424232000180");

@@ -8,6 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import br.sceweb.modelo.Controle;
 import br.sceweb.modelo.Empresa;
 import br.sceweb.modelo.EmpresaDAO;
 
@@ -15,7 +16,7 @@ public class UC01CadastrarEmpresa {
 
 	static EmpresaDAO empresaDAO;
 	static Empresa empresa;
-	
+	static Controle controle;
 	@BeforeClass
 	/**
 	 * cria os objetos que realizam o caso de uso cadastrar empresa
@@ -24,6 +25,7 @@ public class UC01CadastrarEmpresa {
 	public static void setUpBeforeClass() throws Exception {
 		empresaDAO = new EmpresaDAO();
 		empresa = new Empresa();
+		controle = new Controle();
 		//89.424.232/0001-80
 		empresa.setNomeDaEmpresa("empresa x");
 		empresa.setCnpj("89424232000180");
@@ -84,6 +86,19 @@ public class UC01CadastrarEmpresa {
 			assertEquals("nome da empresa inválido!", e.getMessage());
 		}
 				
+	}
+	
+	/**
+	 * obj - verificar o comportamento do sistema na inclusão de uma empresa com sucesso por meio do Controle
+	 * @throws SQLException
+	 * */
+	
+	@Test
+	public void CT05UC01FBCadastra_empresa_com_sucesso() throws SQLException {
+		controle.ExcluirEmpresa("89424232000180");
+		assertEquals("cadastro realizado com sucesso", controle.cadastrarEmpresa("89424232000180","empresa x","empresa x", "Rua taquari", "2222"));
+		controle.ExcluirEmpresa("89424232000180");
+		
 	}
 	
 	@AfterClass
